@@ -1,55 +1,46 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
-const TrafficLight = () => {
-    const [color, setColor] = useState('');
+const TrafficLight = (props) => {
+    const lightColor = props.lightColor;
+    const [selected, selectLight] = useState('');
 
     const clickHandler = (e) => {
+        console.log()
         if(e.target.id === 'red-light') {
-            setColor('red')
+            selectLight('red')
+            document.querySelector('#red-light').classList.add('selected')
+
+            const yellowLight = document.querySelector('#yellow-light')
+            const greenLight = document.querySelector('#green-light')
+
+            yellowLight.classList.remove('selected')
+            greenLight.classList.remove('selected')
         }
         if(e.target.id === 'yellow-light') {
-            setColor('yellow')
+            selectLight('yellow')
+            document.querySelector('#yellow-light').classList.add('selected')
+
+            const redLight = document.querySelector('#red-light')
+            const greenLight = document.querySelector('#green-light')
+
+            redLight.classList.remove('selected')
+            greenLight.classList.remove('selected')
         }
         if(e.target.id === 'green-light') {
-            setColor('green')
+            selectLight('green')
+            document.querySelector('#green-light').classList.add('selected')
+
+            const yellowLight = document.querySelector('#yellow-light')
+            const redLight = document.querySelector('#red-light')
+
+            yellowLight.classList.remove('selected')
+            redLight.classList.remove('selected')
         }
     }
 
     return (
-        <div class="row mx-auto">
-            <div class="col-2 mx-auto">
-                <div class="col-1 mx-auto bg-black" id="traffic-top">
-                    `|
-                     |
-                     |
-                     |
-                    `
-                </div>
-                <div class='col-12 mx-auto bg-black rounded-top rounded-bottom'>
-                    <div class={`p-5 col-6 rounded-circle mx-auto light-body h-100 w-100 ${color === 'red' ? 'selected' : ''}`}>
-                         
-                        <div class="light rounded-circle mx-auto">
-                            <button id="red-light" class="h-100 w-100 rounded-circle" onClick={e => clickHandler(e)}>
-                            </button>
-                        </div>
-                    </div>
-                    <div class={`p-5 col-6 rounded-circle mx-auto bg-black light-body h-100 w-100 ${color === 'yellow' ? 'selected' : ''}`}>
-                         
-                        <div class="light rounded-circle mx-auto">
-                            <button id="yellow-light" class="h-100 w-100 rounded-circle" onClick={e => clickHandler(e)}>
-                            </button>
-                        </div>
-                    </div>
-                    <div class={`p-5 rounded-circle col-6 mx-auto bg-black light-body h-100 w-100 ${color === 'green' ? 'selected' : ''}`}>
-                         
-                        <div class="rounded-circle mx-auto light">
-                            <button id="green-light" class="h-100 w-100 rounded-circle green-light" onClick={e => clickHandler(e)}>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id={`${lightColor}-light`} className={`light rounded-circle mx-auto ${selected === lightColor ? 'selected' : ''}`} onClick={e => clickHandler(e)}>
         </div>
     )
 }

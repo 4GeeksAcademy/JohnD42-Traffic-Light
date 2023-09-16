@@ -22,30 +22,26 @@
 
 #red-light {
     background-color: red;
-    color: black;
-    height: 75px;
-    width: 75px;
 }
 
 #yellow-light {
     background-color: orange;
-    color: black;
-    height: 75px;
-    width: 75px;
 }
 
 #green-light {
     background-color: green;
-    color: black;
-    height: 75px;
-    width: 75px;
 }
 
 .light-body {
-    height: 115px;
+    height: 250px;
+    width: 100px;
 }
 
 .selected {
-    background: radial-gradient(#faecb7,black, transparent);
-    z-index: 100;
+    box-shadow: 0 0 100px 15px rgb(255, 225, 106)
+}
+
+#traffic-top {
+    width: 20px;
+    height: 50px;
 }
