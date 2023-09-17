@@ -9,10 +9,6 @@ const Home = () => {
 	return (
 		<div className="container">
 			<TrafficLightBody />
-			<div className="col-1 mx-auto">
-				<LightCycleButton />
-			</div>
-
 		</div>
 	);
 };

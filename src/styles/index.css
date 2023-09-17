@@ -32,8 +32,17 @@
     background-color: green;
 }
 
-.light-body {
+#purple-light {
+    background-color: purple;
+}
+
+.light-body-no-purp {
     height: 250px;
+    width: 100px;
+}
+
+.light-body-purp {
+    height: 325px;
     width: 100px;
 }
 
@@ -45,3 +54,9 @@
     width: 20px;
     height: 50px;
 }
+
+.btns-div {
+    width: 200px;
+    height: 50px;
+}
+

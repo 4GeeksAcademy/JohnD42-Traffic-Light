@@ -1,17 +1,88 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TrafficLight from './TrafficLight.jsx'
+import LightCycleButton from './LightCycleButton.jsx'
+import PurpleButton from './PurpleButton.jsx'
 
 const TrafficLightBody = () => {
-    
+    const [purpleEnabled, setPurpleEnabled] = useState(false);
+    const [selected, changeSelection] = useState('');
+    const [cycling, setCycling] = useState(false);
+    const [intervalID, setIntervalID] = useState('');
+
+    const changeSelectedLight = (e) => {
+        if(e.target.id === 'red-light') {
+            changeSelection('red')
+        }
+        if(e.target.id === 'yellow-light') {
+            changeSelection('yellow')
+        }
+        if(e.target.id === 'green-light') {
+            changeSelection('green')
+        }
+        if(e.target.id === 'purple-light') {
+            changeSelection('purple')
+        }
+    }
+
+    const toggleLights = () => {
+        console.log(selected)
+        if (selected === 'purple') {
+            changeSelection('red')
+        }
+        else if (selected === 'green' && purpleEnabled === true) {
+            changeSelection('purple')
+        }
+        else if (selected === 'green') {
+            changeSelection('red')
+        }
+        else if (selected === 'yellow') {
+            changeSelection('green')
+        }
+        else if (selected === 'red') {
+            changeSelection('yellow')
+        }
+        else {
+            console.log('changing selection')
+            changeSelection('red')
+            console.log(selected)
+        }
+    }
+
+    const cycleLights = () => {
+        if(cycling === false) {
+            setIntervalID(setInterval(toggleLights,3000))
+            setCycling(true);
+        }
+        else {
+            clearInterval(intervalID);
+        }
+    }
+
+    const togglePurple = () => {
+        if (purpleEnabled === false) {
+            setPurpleEnabled(true)
+        }
+        else {
+            setPurpleEnabled(false)
+        }
+    }
+
     return (
         <div className="row mx-auto">
             <div className="col-2 mx-auto">
                 <div className="col-1 mx-auto bg-black" id="traffic-top">
                 </div>
-                <div className='mx-auto bg-black rounded-top rounded-bottom light-body p-2'>   
-                    <TrafficLight lightColor="red"/>
-                    <TrafficLight lightColor="yellow"/>
-                    <TrafficLight lightColor="green"/>
+                <div className={`mx-auto bg-black rounded-top rounded-bottom p-2 ${purpleEnabled === true ? 'light-body-purp' : 'light-body-no-purp'}`}>   
+                    <TrafficLight lightColor="red" selected={selected} changeSelectedLight={changeSelectedLight}/>
+                    <TrafficLight lightColor="yellow" selected={selected} changeSelectedLight={changeSelectedLight}/>
+                    <TrafficLight lightColor="green" selected={selected} changeSelectedLight={changeSelectedLight}/>
+                    {purpleEnabled ? <TrafficLight lightColor="purple" selected={selected} changeSelectedLight={changeSelectedLight}/> : null}
+                </div>
+                <div className="mx-auto">
+                    <div className="mx-auto col-1 btns-div">
+                        <LightCycleButton selected={selected} cycleLights={cycleLights} cycling={cycling} intervalID={intervalID}/>
+                        <PurpleButton togglePurple={togglePurple}/>
+                    </div>
                 </div>
             </div>
         </div>
