@@ -42,9 +42,7 @@ const TrafficLightBody = () => {
             changeSelection('yellow')
         }
         else {
-            console.log('changing selection')
             changeSelection('red')
-            console.log(selected)
         }
     }
 
@@ -55,6 +53,7 @@ const TrafficLightBody = () => {
         }
         else {
             clearInterval(intervalID);
+            setCycling(false);
         }
     }
 
@@ -78,9 +77,11 @@ const TrafficLightBody = () => {
                     <TrafficLight lightColor="green" selected={selected} changeSelectedLight={changeSelectedLight}/>
                     {purpleEnabled ? <TrafficLight lightColor="purple" selected={selected} changeSelectedLight={changeSelectedLight}/> : null}
                 </div>
-                <div className="mx-auto">
-                    <div className="mx-auto col-1 btns-div">
-                        <LightCycleButton selected={selected} cycleLights={cycleLights} cycling={cycling} intervalID={intervalID}/>
+                <div className="row">
+                    <div className="col-6">
+                        <LightCycleButton selected={selected} cycleLights={cycleLights}/>
+                    </div>
+                    <div className="col-6">
                         <PurpleButton togglePurple={togglePurple}/>
                     </div>
                 </div>
