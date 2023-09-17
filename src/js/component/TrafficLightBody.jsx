@@ -46,13 +46,17 @@ const TrafficLightBody = () => {
         }
     }
 
+    useEffect(() => {
+        if(cycling === true) {
+        setTimeout(() => toggleLights(),3000)
+        }
+    },[cycling,selected])
+
     const cycleLights = () => {
         if(cycling === false) {
-            setIntervalID(setInterval(toggleLights,3000))
             setCycling(true);
         }
         else {
-            clearInterval(intervalID);
             setCycling(false);
         }
     }

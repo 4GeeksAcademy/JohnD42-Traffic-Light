@@ -47,7 +47,7 @@
 }
 
 .selected {
-    box-shadow: 0 0 100px 15px rgb(255, 225, 106)
+    box-shadow: 0 0 100px 30px rgb(255, 225, 106)
 }
 
 #traffic-top {
